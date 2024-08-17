@@ -1,0 +1,141 @@
+
+CREATE DATABASE Zoologico
+    DEFAULT CHARACTER SET = 'utf8mb4';
+
+    use Zoologico;
+
+    CREATE TABLE Especies (
+        ID_especies INT (5) AUTO_INCREMENT PRIMARY KEY,
+        Nombre_cientifico VARCHAR (100),
+        Descripcion_general VARCHAR (100)
+    )
+
+    CREATE Table Especies_Habitats(
+        ID_especies1 INT (5),
+        ID_habitats1 INT(5)
+    )
+
+    create Table Habitats (
+        ID_habitats int (5) AUTO_INCREMENT PRIMARY KEY,
+        Nombre_habitats VARCHAR (100),
+        Clima_habitats  VARCHAR (100),
+        tipo_vegetacion VARCHAR (100),
+        Continente      VARCHAR (100)
+    )
+
+    CREATE Table Zonas(
+        ID_zonas INT (5) AUTO_INCREMENT PRIMARY KEY,
+        Nombre_zona VARCHAR (100),
+        Extencion VARCHAR (100)
+    )
+
+    create table Especies_Zonas (
+        ID_zonas2 int (5),
+        ID_especies2 int (5)
+    )
+
+    CREATE table Cuidadores(
+        ID_cuidadores int (5) AUTO_INCREMENT primary KEY,
+        Nombre_cuidadores    varchar (100),
+        Direccion_cuidadores varchar (100),
+        Telefono_cuidadores  VARCHAR (100),
+        Fecha_ingreso        DATETIME 
+    )
+
+    create table Especies_Cuidadores(
+        ID_cuidadores3 int (5),
+        ID_especies3 int (5)
+    )
+
+    create table Itinerarios_Cuidadores(
+        ID_cuidadores4 int (5),
+        ID_itinerarios4 int (5)
+    )
+
+    create table Itinerarios (
+        ID_itinerarios int (5) AUTO_INCREMENT primary key,
+        Duracion_recorrido     DATETIME,
+        longitud_recorrido     VARCHAR (100),
+        Num_visitantes_autorizados int (5),
+        Num_especies_recorridas int (5)
+    )
+
+    CREATE Table Itinerarios_Guias (
+        ID_itinerarios5 int (5),
+        ID_Guias5 int (5)
+    )
+
+    create table Guias (
+        ID_Guias int (5) AUTO_INCREMENT PRIMARY KEY,
+        Nombre_guia VARCHAR (100),
+        Direccion_guia VARCHAR (100),
+        Telefono_guia VARCHAR (100),
+        Fecha_ingreso_G DATETIME 
+    )
+
+alter table Especies_Habitats ADD constraint fk_id1 FOREIGN KEY (ID_especies1) REFERENCES Especies (ID_especies)
+
+alter table Especies_Habitats ADD constraint fk_id2 FOREIGN KEY (ID_habitats1) REFERENCES Habitats (ID_habitats)
+
+alter table Especies_Zonas ADD constraint fk_id3 FOREIGN KEY (ID_zonas2) REFERENCES Zonas (ID_zonas)
+
+alter table Especies_Zonas ADD constraint fk_id4 FOREIGN KEY (ID_especies2) REFERENCES Especies (ID_especies)
+
+alter table Especies_Cuidadores ADD constraint fk_id5 FOREIGN KEY (ID_especies3) REFERENCES Especies (ID_especies)
+
+alter table Especies_Cuidadores ADD constraint fk_id6 FOREIGN KEY (ID_cuidadores3) REFERENCES Cuidadores (ID_cuidadores)
+
+alter table Itinerarios_Cuidadores ADD constraint fk_id7 FOREIGN KEY (ID_cuidadores4) REFERENCES Cuidadores (ID_cuidadores)
+
+alter table Itinerarios_Cuidadores ADD constraint fk_id8 FOREIGN KEY (ID_itinerarios4) REFERENCES Itinerarios (ID_itinerarios)
+
+alter table Itinerarios_Guias ADD constraint fk_id9 FOREIGN KEY (ID_itinerarios5) REFERENCES Itinerarios (ID_itinerarios)
+
+alter table Itinerarios_Guias ADD constraint fk_id10 FOREIGN KEY (ID_Guias5) REFERENCES Guias (ID_Guias)
+
+
+-- Inserciones de especies
+INSERT into Especies (Nombre_cientifico, Descripcion_general) VALUES ("Panthera leo", "Un gran felino conocido como el rey de la selva.");
+INSERT into Especies (Nombre_cientifico, Descripcion_general) VALUES ("Balaenoptera musculus", "El animal más grande del planeta, conocido como la ballena azul.");
+INSERT into Especies (Nombre_cientifico, Descripcion_general) VALUES ("Elephas maximus", "El elefante asiático, un mamífero terrestre de gran tamaño con una trompa larga.");
+INSERT into Especies (Nombre_cientifico, Descripcion_general) VALUES ("Ailuropoda melanoleuca", "El panda gigante, conocido por su pelaje blanco y negro y su dieta a base de bambú.");
+INSERT into Especies (Nombre_cientifico, Descripcion_general) VALUES ("Chelonia mydas", "La tortuga verde, una especie marina que habita en aguas tropicales y subtropicales.");
+
+-- Inserciones de Habitats
+INSERT into Habitats (Nombre_habitats,Clima_habitats, tipo_vegetacion,Continente) VALUES ("Sabana", "tropical humedo/seco","predominantemente herbácea, con gramíneas perennes que tienen tallos huecos y flores simples dispuestas en espigas"," África, Asia, Australia y América del Sur");
+INSERT into Habitats (Nombre_habitats, Clima_habitats, tipo_vegetacion, Continente) VALUES ("Bosque Boreal", "subártico frío", "coníferas como pinos, abetos y abedules", "América del Norte, Europa, Asia");
+INSERT into Habitats (Nombre_habitats, Clima_habitats, tipo_vegetacion, Continente) VALUES ("Desierto", "árido", "escasa vegetación como cactus y arbustos espinosos", "África, Asia, América del Norte, Australia");
+INSERT into Habitats (Nombre_habitats, Clima_habitats, tipo_vegetacion, Continente) VALUES ("Selva Tropical", "tropical húmedo", "densa vegetación con árboles altos, lianas y epífitas", "América del Sur, África, Asia");
+INSERT into Habitats (Nombre_habitats, Clima_habitats, tipo_vegetacion, Continente) VALUES ("Tundra", "polar", "musgos, líquenes y pequeños arbustos adaptados al frío extremo", "Ártico, Antártico, Siberia, Canadá");
+
+-- Inserciones de zonas
+
+INSERT into Zonas (Nombre_zona, Extencion) VALUES ("Sabana Africana", "25,000 metros cuadrados");
+INSERT into Zonas (Nombre_zona, Extencion) VALUES ("Bosque Tropical", "30,000 metros cuadrados");
+INSERT into Zonas (Nombre_zona, Extencion) VALUES ("Zona de Reptiles", "15,000 metros cuadrados");
+INSERT into Zonas (Nombre_zona, Extencion) VALUES ("Aviario Amazónico", "20,000 metros cuadrados");
+INSERT into Zonas (Nombre_zona, Extencion) VALUES ("Pabellón Ártico", "18,000 metros cuadrados");
+
+-- Inserciones de cuidadores
+
+INSERT into Cuidadores (Nombre_cuidadores, Direccion_cuidadores, Telefono_cuidadores, Fecha_ingreso) VALUES ("María Pérez", "Carrera 7 #45-89, Bogotá", "3133350948", "2021-06-15 ");
+INSERT into Cuidadores (Nombre_cuidadores, Direccion_cuidadores, Telefono_cuidadores, Fecha_ingreso) VALUES ("Juan Rodríguez", "Calle 100 #15-30, Bogotá", "3153443997", "2020-03-10");
+INSERT into Cuidadores (Nombre_cuidadores, Direccion_cuidadores, Telefono_cuidadores, Fecha_ingreso) VALUES ("Luisa Gómez", "Avenida Suba #127-45, Bogotá", "3215869742", "2019-12-01 ");
+INSERT into Cuidadores (Nombre_cuidadores, Direccion_cuidadores, Telefono_cuidadores, Fecha_ingreso) VALUES ("Carlos Fernández", "Calle 26 #30-10, Bogotá", "3205947864", "2022-08-25 ");
+INSERT into Cuidadores (Nombre_cuidadores, Direccion_cuidadores, Telefono_cuidadores, Fecha_ingreso) VALUES ("Ana Morales", "Carrera 13 #93-56, Bogotá", "3218567495", "2023-02-14");
+
+-- Inserciones de itinerarios
+
+INSERT into Itinerarios ( Duracion_recorrido,longitud_recorrido,Num_visitantes_autorizados ,Num_especies_recorridas) VALUES ("2024-01-01 2:00:00","120 M","30","50");
+INSERT into Itinerarios (Duracion_recorrido, longitud_recorrido, Num_visitantes_autorizados, Num_especies_recorridas) VALUES ("2024-01-01 3:30:00", "150 M", "25", "40");
+INSERT into Itinerarios (Duracion_recorrido, longitud_recorrido, Num_visitantes_autorizados, Num_especies_recorridas) VALUES ("2024-01-01 1:00:00", "200 M", "35", "60");
+INSERT into Itinerarios (Duracion_recorrido, longitud_recorrido, Num_visitantes_autorizados, Num_especies_recorridas) VALUES ("2024-01-01 5:30:00", "100 M", "20", "30");
+INSERT into Itinerarios (Duracion_recorrido, longitud_recorrido, Num_visitantes_autorizados, Num_especies_recorridas) VALUES ("2024-01-01 04:00:00", "250 M", "40", "70");
+
+-- Inserciones de guias
+
+INSERT into Guias (Nombre_guia, Direccion_guia, Telefono_guia, Fecha_ingreso_G) VALUES ("Laura", "Calle 72", "3201234567", "2021-05-20 08:00:00");
+INSERT into Guias (Nombre_guia, Direccion_guia, Telefono_guia, Fecha_ingreso_G) VALUES ("Pedro", "Carrera 15", "3102345678", "2020-07-15 09:30:00");
+INSERT into Guias (Nombre_guia, Direccion_guia, Telefono_guia, Fecha_ingreso_G) VALUES ("Sofia", "Avenida Suba", "3003456789", "2019-10-01 07:45:00");
+INSERT into Guias (Nombre_guia, Direccion_guia, Telefono_guia, Fecha_ingreso_G) VALUES ("Luis", "Calle 26", "3204567890", "2022-02-25 10:15:00");
+INSERT into Guias (Nombre_guia, Direccion_guia, Telefono_guia, Fecha_ingreso_G) VALUES ("Ana", "Carrera 10", "3105678901", "2023-03-10 11:00:00");
